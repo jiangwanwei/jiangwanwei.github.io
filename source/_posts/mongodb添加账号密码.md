@@ -4,7 +4,7 @@ comments: true
 date: 2017-11-09 15:30:01
 tags: [MongoDB]
 categories:
-    - MongoDB
+    # - MongoDB
     - 工具
 ---
 

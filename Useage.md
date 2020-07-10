@@ -1,6 +1,10 @@
 ## Useage
 
+
 ```
+// 开启一个本地服务
+$ hexo server
+
 // 新建文件
 $ hexo new 文件名称
 

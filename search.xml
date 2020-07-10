@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[汉字正则]]></title>
+    <url>%2F2020%2F07%2F10%2F%E6%B1%89%E5%AD%97%E6%AD%A3%E5%88%99%2F</url>
+    <content type="text"><![CDATA[“汉字”在计算机领域的学名叫中日韩统一表意文字（俗称 CJK），在 2017 年 6 月发布的 Unicode 10 标准中，它有了代码级明确的指代：export const HanZi = /\p{Unified_Ideograph}/u;]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>正则表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TS常用泛型]]></title>
+    <url>%2F2020%2F07%2F09%2FTS%E5%B8%B8%E7%94%A8%E6%B3%9B%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[Partial 将传入的属性变为可选项123type Partial&lt;T&gt; = &#123; [P in keyof T]?: T[P] &#125;Required 将传入的属性变为可选项123type Required&lt;T&gt; = &#123; [P in keyof T]-?: T[P]&#125;-? 移除可选说明，与之对应的还有个 +?Readonly 将传入的属性变为只读选项123type Readonly&lt;T&gt; = &#123; readonly [P in keyof T]: T[P]&#125;Record 将 K 中所有的属性的值转化为 T 类型123456789101112131415161718type Record&lt;K extends keyof any, T&gt; = &#123; [P in K]: T &#125;// egtype k = &#123; a: string n: number&#125;type d = Record&lt;keyof k, string&gt;/* d = &#123; a: string n: string&#125;*/Pick 从 T 中取出 一系列 K 的属性1234567891011121314151617type Pick&lt;T, K extends keyof T&gt; = &#123; [P in K]: T[P] &#125;// egtype k = &#123; a: string n: number&#125;// 从k中取出atype d = Pick&lt;k, 'a'&gt;/* d = &#123; a: string &#125;*/Exclude（2.8） 从 T 中找出 U 中没有的元素,或者说是 从T 中排除 U123type Exclude&lt;T, U&gt; = T extends U ? never : Ttype T = Exclude&lt;1 | 2, 1 | 3&gt; // -&gt; 2Extract（2.8） 提取出 T 包含在 U 中的元素,或者说是 从 T 中提取出 U123type Extract&lt;T, U&gt; = T extends U ? T : never;type T = Extract&lt;1 | 2, 1&gt; // -&gt; 1Omit 忽略对象某些属性1234type Omit&lt;T, K&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;// 从 &#123;name: string, age: number&#125; 忽略 nametype Foo = Omit&lt;&#123;name: string, age: number&#125;, 'name'&gt; // -&gt; &#123; age: number &#125;ReturnType 用它取到函数返回值的类型(infer R 就是声明一个变量来承载传入函数签名的返回值类型)12345678910type ReturnType&lt;T&gt; = T extends ( ...args: any[]) =&gt; infer R ? R : any; function foo(x: number): Array&lt;number&gt; &#123; return [x];&#125;type fn = ReturnType&lt;typeof foo&gt;; // number[]]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Typscirpt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Js的New发生了什么]]></title>
+    <url>%2F2020%2F07%2F03%2FJs%E7%9A%84New%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%2F</url>
+    <content type="text"><![CDATA[js new 做了什么？1、创建一个空对象2、空对象原型指向目标方法的原型3、执行方法目标方法4、返回新对象12345678910111213141516171819202122// 方式1function newMethod(Target, ...rest) &#123; // 1 let o = &#123;&#125; // 2 o.__proto__ = Target.prototype // 3 Target.apply(o, rest) // 4 return o&#125;// 方式2function newMethod(Target, ...rest) &#123; // 1.以构造器的prototype属性为原型，创建新对象； let o = Object.create(Target.prototype) // 2.将this和调用参数传给构造器执行 Target.apply(o, rest) // 3.返回第一步的对象 return o&#125;]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[柯里化]]></title>
+    <url>%2F2020%2F07%2F01%2F%E6%9F%AF%E9%87%8C%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[概念：函数柯里化是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。12345678910111213141516const curry = (fn, ...args) =&gt; args.length &lt; fn.length ? (...argument) =&gt; curry(fn, ...args, ...argument) : fn(...args) function sumFn(a, b, c) &#123; return a + b + c&#125;const sum = curry(sumFn)sum(1, 2, 3) // 6sum(1)(2)(3) // 6sum(1, 2)(3) // 6sum(1)(2, 3) // 6函数柯里化的主要作用：参数复用提前返回 – 返回接受余下的参数且返回结果的新函数延迟执行 – 返回新函数，等待执行]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[简单Call方法重写]]></title>
+    <url>%2F2020%2F07%2F01%2F%E7%AE%80%E5%8D%95Call%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%2F</url>
+    <content type="text"><![CDATA[原理其实就是讲方法绑定到目标对象上，然后执行，执行完毕后清除方法12345678910Function.prototype.call = function() &#123; let [thisarg, ...args] = [...arguments] if (!thisarg) &#123; thisarg = window || global &#125; thisarg.func = this let res = thisarg.func(...args) delete thisarg.func return res&#125;]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[正则元]]></title>
+    <url>%2F2020%2F06%2F18%2F%E6%AD%A3%E5%88%99%E5%85%83%2F</url>
+    <content type="text"><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>正则表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[event对象中target和currentTarget属性的区别]]></title>
+    <url>%2F2020%2F06%2F13%2Fevent%E5%AF%B9%E8%B1%A1%E4%B8%ADtarget%E5%92%8CcurrentTarget%E5%B1%9E%E6%80%A7%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[target: 返回触发事件的元素currentTarget: 返回绑定事件的元素123456&lt;ul id=&apos;ul&apos;&gt;&lt;li&gt;click&lt;/li&gt;&lt;/ul&gt;document.getElementById(&apos;ul&apos;).onclick = function(e) &#123; // 点击li e.target 为li // 点击li e.currentTarget 为ul （点击ul中任何地方 都返回 ul)&#125;]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[软件license]]></title>
+    <url>%2F2020%2F06%2F10%2F%E8%BD%AF%E4%BB%B6license%2F</url>
+    <content type="text"><![CDATA[]]></content>
+      <categories>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>license</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[AOP面向切面编程]]></title>
+    <url>%2F2020%2F06%2F08%2FAOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[AOP不一定都像Spring AOP那样，是在运行时生成代理对象来织入的，还可以在编译期、类加载期织入，比如AspectJ。下面再慢慢聊AOP。什么时候要用到面向切面AOP呢？举个例子，你想给你的网站加上鉴权，对某些url，你认为不需要鉴权就可以访问，对于某些url，你认为需要有特定权限的用户才能访问如果你依然使用OOP，面向对象，那你只能在那些url对应的Controller代码里面，一个一个写上鉴权的代码而如果你使用了AOP呢？12345protected void configure(HttpSecurity http) throws Exception &#123; http .authorizeRequests() .antMatchers("/static","/register").permitAll() .antMatchers("/user/**").hasRoles("USER", "ADMIN")这样的做法，对原有代码毫无入侵性，这就是AOP的好处了，把和主业务无关的事情，放到代码外面去做。所以当你下次发现某一行代码经常在你的Controller里出现，比如方法入口日志打印，那就要考虑使用AOP来精简你的代码了。聊完了AOP是啥，现在再来聊聊实现原理。AOP像OOP一样，只是一种编程范式，AOP并没有规定说，实现AOP协议的代码，要用什么方式去实现。比如上面的鉴权的例子，假设我要给UserController的saveUser()方法加入鉴权，第一种方式，我可以采用代理模式，什么是代理模式，就是我再生成一个代理类，去代理UserController的saveUser()方法，代码大概就长这样：12345678class UserControllerProxy &#123; private UserController userController; public void saveUser() &#123; checkAuth(); userController.saveUser(); &#125;&#125;这样在实际调用saveUser()时，我调用的是代理对象的saveUser()方法，从而实现了鉴权。代理分为静态代理和动态代理，静态代理，顾名思义，就是你自己写代理对象，动态代理，则是在运行期，生成一个代理对象。Spring AOP就是基于动态代理的，如果要代理的对象，实现了某个接口，那么Spring AOP会使用JDK Proxy，去创建代理对象，而对于没有实现接口的对象，就无法使用JDK Proxy去进行代理了（为啥？你写一个JDK Proxy的demo就知道了），这时候Spring AOP会使用Cglib，生成一个被代理对象的子类，来作为代理，放一张图出来就明白了：好，上面讲的是AOP的第一种实现，运行时织入。但是不是所有AOP的实现都是在运行时进行织入的，因为这样效率太低了，而且只能针对方法进行AOP，无法针对构造函数、字段进行AOP。]]></content>
+      <categories>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>AOP面向切面编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[搭建自己的服务器（阿里云Linux）]]></title>
     <url>%2F2019%2F09%2F05%2F%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
     <content type="text"><![CDATA[购买登录阿里云-云服务器ECS选择配置。ssh登录进入控制台-云服务器ECS，选择实例，初次进入需要设置登录密码（更多-密码/秘钥-重置实例密码），然后通过命令行 ssh -lroot yourIP(-l 指定登录用户名) 或者 ssh root@yourIP进行连接，然后输入密码（后期可以设置 authorized_keys 来免密登录）重置系统有时间你对当前服务器的管理不如意（搞不清楚）时，那么需要重头来玩服务器，进入控制台选中实例-更多-磁盘与镜像-重新初始化磁盘 来完成重置系统，重置系统后登录时需要对上一次进入系统记录的用户信息进行清理，否则会提示12345678910111213@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!Someone could be eavesdropping on you right now (man-in-the-middle attack)!It is also possible that a host key has just been changed.The fingerprint for the ECDSA key sent by the remote host isSHA256:8hgJ8jpcBr1tm6HS72FpXwMrjba8MQqlqYJQLPB/Qf4.Please contact your system administrator.Add correct host key in /Users/jiangwanwei/.ssh/known_hosts to get rid of this message.Offending ECDSA key in /Users/jiangwanwei/.ssh/known_hosts:26ECDSA host key for xx.xx.xx.xx has changed and you have requested strict checking.Host key verification failed.原因是因为才重装系统后，再次进行远程连接上，在输入yes后，本机会将远程机器的信息，写到/Users/jiangwanwei/.ssh/known_hosts文件中，所以如果远程重装系统了，本机一定要先清理掉。（删除对应你服务器ip的那条记录）。开启端口新增端口需要到实例上面开启后才能生效，实例 - 更多 - 网络和安全组 - 安全组配置 - 配置规则 - 添加规则组 ，写入端口范围 例如 8080/8080 授权对象 设置为 0.0.0.0/0 。设置完成后重启服务器。需要注意开启端口、或者是修改密码后都需要重启服务器（选中服务-重启）yum介绍Yum(全称为 Yellow dogUpdater, Modified)是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。配置路径为 /etc/yum.conf, 常用配置：1234cachedir=/var/cache/yum #yum下载的RPM包的缓存目录keepcache=0 #缓存是否保存，1保存，0不保存。debuglevel=2 #调试级别(0-10)，默认为2logfile=/var/log/yum.log #yum的日志文件所在的位置常用操作：安装123$ yum install 全部安装$ yum install package1 安装指定的安装包package1$ yum groupinsall group1 安装程序组group1更新和升级12345$ yum update 全部更新$ yum update package1 更新指定程序包package1$ yum check-update 检查可更新的程序$ yum upgrade package1 升级指定程序包package1$ yum groupupdate group1 升级程序组group1查找和显示1234$ yum info package1 显示安装包信息package1$ yum list 显示所有已经安装和可以安装的程序包$ yum list package1 显示指定程序包安装情况package1$ yum groupinfo group1 显示程序组group1信息yum search string 根据关键字string查找安装包删除程序123$ yum remove erase package1 删除程序包package1$ yum groupremove group1 删除程序组group1$ yum deplist package1 查看程序package1依赖情况清除缓存1234$ yum clean packages 清除缓存目录下的软件包$ yum clean headers 清除缓存目录下的 headers$ yum clean oldheaders 清除缓存目录下旧的 headers$ yum clean, yum clean all (= yum clean packages; yum clean oldheaders) 清除缓存目录下的软件包及旧的header安装nginx123$ yum install epel-release # 下载 epel-release$ yum install nginx # 下载 nginx$ cd /etc/nginx # 配置epel-release：EPEL (Extra Packages for Enterprise Linux，企业版Linux的额外软件包) 是Fedora小组维护的一个软件仓库项目，为RHEL/CentOS提供他们默认不提供的软件包。这个源兼容RHEL及像CentOS和Scientific Linux这样的衍生版本。可以很容易地通过yum命令从EPEL源上获取上万个在CentOS自带源上没有的软件。EPEL提供的软件包大多基于其对应的Fedora软件包，不会与企业版Linux发行版本的软件发生冲突或替换其文件。安装nodejs123456789# 下载$ wget https://npm.taobao.org/mirrors/node/v12.9.1/node-v12.9.1-linux-x64.tar.xz# 解压$ tar -xvf node-v12.9.1-linux-x64.tar.xz# 移动到 /usr# 建立软连接$ ln -s /usr/local/share/applications/nodejs/bin/* /usr/local/bin/需要注意的一点 通过npm安装的全局包 如果有出现包命令没有加入到全局环境变量时需要手动 在执行以下软连接 ln -s /usr/local/share/applications/nodejs/bin/* /usr/local/bin/，但是每次安装全局包后都要执行，更好的办法是执行一次 echo -e &quot;export PATH=$(npm prefix -g)/bin:$PATH&quot; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc 来新增npm全局命令道环境变量PATH中（秩序执行一次）。systemctlsystemctl 命令的两大作用，1、控制 systemd 系统 2、管理系统上运行的服务。常用操作(以nginx为例)：123456789101112131415161718192021222324252627282930# 1.启动nfs服务$ systemctl start nginx# 2.设置开机自启动$ systemctl enable nginx# 3.停止开机自启动$ systemctl disable nginx# 4.查看服务当前状态$ systemctl status nginx# 5.重新启动某服务$ systemctl restart nginx# 6.查看所有已启动的服务$ systemctl list -units --type=service# 开启防火墙22端口$ iptables -I INPUT -p tcp --dport 22 -j ACCEPT# 如果仍然有问题，就可能是SELinux导致的# 关闭SElinux：# 修改/etc/selinux/config文件中的SELINUX=”” 为 disabled，然后重启# 彻底关闭防火墙：$ systemctl status firewalld.service$ systemctl stop firewalld.service $ systemctl disable firewalld.service至此，服务器nginx 和nodejs都安装好了，可以愉快的玩耍了。。。]]></content>
@@ -155,7 +254,7 @@
   <entry>
     <title><![CDATA[常用正则表达式]]></title>
     <url>%2F2017%2F03%2F08%2F%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[Js代码123var reg = /^(\d&#123;1,4&#125;)(-|\/)(\d&#123;1,2&#125;)\2(\d&#123;1,2&#125;)$/; var r = fieldValue.match(reg); if(r==null)alert(&apos;Date format error!&apos;);下面是整理的，在前端开发中经常使用到的20个正则表达式。校验密码强度密码的强度必须是包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间。1^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$校验中文字符串仅能是中文。1^[\u4e00-\u9fa5]&#123;0,&#125;$由数字、26个英文字母或下划线组成的字符串1^\w+$校验E-Mail 地址同密码一样，下面是E-mail地址合规性的正则检查语句。1[\w!#$%&amp;&apos;*+/=?^_`&#123;|&#125;~-]+(?:\.[\w!#$%&amp;&apos;*+/=?^_`&#123;|&#125;~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?校验身份证号码下面是身份证号码的正则校验。15 或 18位。15位：1^[1-9]\d&#123;7&#125;((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d&#123;3&#125;$18位：1^[1-9]\d&#123;5&#125;[1-9]\d&#123;3&#125;((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d&#123;3&#125;([0-9]|X)$校验日期“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年。1^(?:(?!0000)[0-9]&#123;4&#125;-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]&#123;2&#125;(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$校验金额金额校验，精确到2位小数。1^[0-9]+(.[0-9]&#123;2&#125;)?$校验手机号下面是国内 13、15、18开头的手机号正则表达式。（可根据目前国内收集号扩展前两位开头号码）1^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$判断IE的版本IE目前还没被完全取代，很多页面还是需要做版本兼容，下面是IE版本检查的表达式。1^.*MSIE [5-8](?:\.[0-9]+)?(?!.*Trident\/[5-9]\.0).*$校验IP-v4地址IP4 正则语句。1\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b校验IP-v6地址IP6 正则语句。1(([0-9a-fA-F]&#123;1,4&#125;:)&#123;7,7&#125;[0-9a-fA-F]&#123;1,4&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,7&#125;:|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,6&#125;:[0-9a-fA-F]&#123;1,4&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,5&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,2&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,4&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,3&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,3&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,4&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,2&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,5&#125;|[0-9a-fA-F]&#123;1,4&#125;:((:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,6&#125;)|:((:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,7&#125;|:)|fe80:(:[0-9a-fA-F]&#123;0,4&#125;)&#123;0,4&#125;%[0-9a-zA-Z]&#123;1,&#125;|::(ffff(:0&#123;1,4&#125;)&#123;0,1&#125;:)&#123;0,1&#125;((25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])\.)&#123;3,3&#125;(25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,4&#125;:((25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])\.)&#123;3,3&#125;(25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9]))检查URL的前缀应用开发中很多时候需要区分请求是HTTPS还是HTTP，通过下面的表达式可以取出一个url的前缀然后再逻辑判断。123if (!s.match(/^[a-zA-Z]+:\/\//)) &#123; s = &apos;http://&apos; + s; &#125;提取URL链接下面的这个表达式可以筛选出一段文本中的URL。1^(f|ht)&#123;1&#125;(tp|tps):\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&amp;=]*)?文件路径及扩展名校验验证windows下文件路径和扩展名（下面的例子中为.txt文件）1^([a-zA-Z]\:|\\)\\([^\\]+\\)*[^\/:*?&quot;&lt;&gt;|]+\.txt(l)?$提取Color Hex Codes有时需要抽取网页中的颜色代码，可以使用下面的表达式。1^#([A-Fa-f0-9]&#123;6&#125;|[A-Fa-f0-9]&#123;3&#125;)$提取网页图片假若你想提取网页中所有图片信息，可以利用下面的表达式。1\&lt; *[img][^\\&gt;]*[src] *= *[\&quot;\&apos;]&#123;0,1&#125;([^\&quot;\&apos;\ &gt;]*)提取页面超链接提取html中的超链接。12(&lt;a\s*(?!.*\brel=)[^&gt;]*)(href=&quot;https?:\/\/)((?!(?:(?:www\.)?&apos;.implode(&apos;|(?:www\.)?&apos;, $follow_list).&apos;))[^&quot;]+)&quot;((?!.*\brel=)[^&gt;]*)(?:[^&gt;]*)&gt; &lt;/a\s*(?!.*\brel=)[^&gt;查找CSS属性通过下面的表达式，可以搜索到相匹配的CSS属性。1^\s*[a-zA-Z\-]+\s*[:]&#123;1&#125;\s[a-zA-Z0-9\s.#]+[;]&#123;1&#125;抽取注释如果你需要移除HMTL中的注释，可以使用如下的表达式。1&lt;!--(.*?)--&gt;匹配HTML标签通过下面的表达式可以匹配出HTML中的标签属性。1&lt;\/?\w+((\s+\w+(\s*=\s*(?:&quot;.*?&quot;|&apos;.*?&apos;|[\^&apos;&quot;&gt;\s]+))?)+\s*|\s*)\/?&gt;非中文1/[^\u4e00-\u9fa5|,]+/]]></content>
+    <content type="text"><![CDATA[123var reg = /^(\d&#123;1,4&#125;)(-|\/)(\d&#123;1,2&#125;)\2(\d&#123;1,2&#125;)$/; var r = fieldValue.match(reg); if(r==null)alert(&apos;Date format error!&apos;);下面是整理的，在前端开发中经常使用到的20个正则表达式。校验密码强度密码的强度必须是包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间。1^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$校验中文字符串仅能是中文。1^[\u4e00-\u9fa5]&#123;0,&#125;$由数字、26个英文字母或下划线组成的字符串1^\w+$校验E-Mail 地址同密码一样，下面是E-mail地址合规性的正则检查语句。1[\w!#$%&amp;&apos;*+/=?^_`&#123;|&#125;~-]+(?:\.[\w!#$%&amp;&apos;*+/=?^_`&#123;|&#125;~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?校验身份证号码下面是身份证号码的正则校验。15 或 18位。15位：1^[1-9]\d&#123;7&#125;((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d&#123;3&#125;$18位：1^[1-9]\d&#123;5&#125;[1-9]\d&#123;3&#125;((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d&#123;3&#125;([0-9]|X)$校验日期“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年。1^(?:(?!0000)[0-9]&#123;4&#125;-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]&#123;2&#125;(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$校验金额金额校验，精确到2位小数。1^[0-9]+(.[0-9]&#123;2&#125;)?$校验手机号下面是国内 13、15、18开头的手机号正则表达式。（可根据目前国内收集号扩展前两位开头号码）1^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$判断IE的版本IE目前还没被完全取代，很多页面还是需要做版本兼容，下面是IE版本检查的表达式。1^.*MSIE [5-8](?:\.[0-9]+)?(?!.*Trident\/[5-9]\.0).*$校验IP-v4地址IP4 正则语句。1\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)&#123;3&#125;(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b校验IP-v6地址IP6 正则语句。1(([0-9a-fA-F]&#123;1,4&#125;:)&#123;7,7&#125;[0-9a-fA-F]&#123;1,4&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,7&#125;:|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,6&#125;:[0-9a-fA-F]&#123;1,4&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,5&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,2&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,4&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,3&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,3&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,4&#125;|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,2&#125;(:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,5&#125;|[0-9a-fA-F]&#123;1,4&#125;:((:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,6&#125;)|:((:[0-9a-fA-F]&#123;1,4&#125;)&#123;1,7&#125;|:)|fe80:(:[0-9a-fA-F]&#123;0,4&#125;)&#123;0,4&#125;%[0-9a-zA-Z]&#123;1,&#125;|::(ffff(:0&#123;1,4&#125;)&#123;0,1&#125;:)&#123;0,1&#125;((25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])\.)&#123;3,3&#125;(25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])|([0-9a-fA-F]&#123;1,4&#125;:)&#123;1,4&#125;:((25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9])\.)&#123;3,3&#125;(25[0-5]|(2[0-4]|1&#123;0,1&#125;[0-9])&#123;0,1&#125;[0-9]))检查URL的前缀应用开发中很多时候需要区分请求是HTTPS还是HTTP，通过下面的表达式可以取出一个url的前缀然后再逻辑判断。123if (!s.match(/^[a-zA-Z]+:\/\//)) &#123; s = &apos;http://&apos; + s; &#125;提取URL链接下面的这个表达式可以筛选出一段文本中的URL。1^(f|ht)&#123;1&#125;(tp|tps):\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&amp;=]*)?文件路径及扩展名校验验证windows下文件路径和扩展名（下面的例子中为.txt文件）1^([a-zA-Z]\:|\\)\\([^\\]+\\)*[^\/:*?&quot;&lt;&gt;|]+\.txt(l)?$提取Color Hex Codes有时需要抽取网页中的颜色代码，可以使用下面的表达式。1^#([A-Fa-f0-9]&#123;6&#125;|[A-Fa-f0-9]&#123;3&#125;)$提取网页图片假若你想提取网页中所有图片信息，可以利用下面的表达式。1\&lt; *[img][^\\&gt;]*[src] *= *[\&quot;\&apos;]&#123;0,1&#125;([^\&quot;\&apos;\ &gt;]*)提取页面超链接提取html中的超链接。12(&lt;a\s*(?!.*\brel=)[^&gt;]*)(href=&quot;https?:\/\/)((?!(?:(?:www\.)?&apos;.implode(&apos;|(?:www\.)?&apos;, $follow_list).&apos;))[^&quot;]+)&quot;((?!.*\brel=)[^&gt;]*)(?:[^&gt;]*)&gt; &lt;/a\s*(?!.*\brel=)[^&gt;查找CSS属性通过下面的表达式，可以搜索到相匹配的CSS属性。1^\s*[a-zA-Z\-]+\s*[:]&#123;1&#125;\s[a-zA-Z0-9\s.#]+[;]&#123;1&#125;抽取注释如果你需要移除HMTL中的注释，可以使用如下的表达式。1&lt;!--(.*?)--&gt;匹配HTML标签通过下面的表达式可以匹配出HTML中的标签属性。1&lt;\/?\w+((\s+\w+(\s*=\s*(?:&quot;.*?&quot;|&apos;.*?&apos;|[\^&apos;&quot;&gt;\s]+))?)+\s*|\s*)\/?&gt;非中文1/[^\u4e00-\u9fa5|,]+/]]></content>
       <categories>
         <category>前端</category>
       </categories>
